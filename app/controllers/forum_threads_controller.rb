@@ -14,9 +14,11 @@ class ForumThreadsController < ApplicationController
 	def create
 		@thread = ForumThread.new(resource_params)
 		@thread.user = User.first
-		@thread.save
-
-		redirect_to root_path
+		if @thread.save
+			redirect_to root_path
+		else
+			render 'new'
+		end
 	end
 
 	private
