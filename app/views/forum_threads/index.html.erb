@@ -18,6 +18,8 @@
 
 			<div class="count">
 				<%= t.forum_posts_count %> Chat
+				<%= link_to "", edit_forum_thread_path(t), class: 'btn btn-primary glyphicon glyphicon-pencil' %>
+				<%= link_to "", forum_thread_path(t), class: 'btn btn-danger glyphicon glyphicon-trash', method: :delete, data: {confirm: 'Are you sure?'} %>
 			</div>
 			<div style="clear: both"></div>
 		</div>
