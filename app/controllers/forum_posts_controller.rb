@@ -1,6 +1,4 @@
 class ForumPostsController < ApplicationController
-	# before_action :authenticate_user!, only: [:create]
-	# # create
 	def create
 		@thread = ForumThread.find(params[:forum_thread_id])
 		@post = ForumPost.new(resource_params)
@@ -8,8 +6,11 @@ class ForumPostsController < ApplicationController
 		@post.forum_thread = @thread
 		@post.user = User.first
 
-	  @post.save
+	  if @post.save
 			redirect_to forum_thread_path(@thread)
+		else
+			render 'forum_threads/show'
+		end
 	end
 
 	private
