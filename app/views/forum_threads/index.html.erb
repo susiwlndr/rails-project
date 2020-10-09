@@ -3,7 +3,7 @@
 		<% if user_signed_in? %>
 		<%= link_to "Buat Diskusi", new_forum_thread_path, class: 'btn btn-primary' %>
 		<%end%>
-		<% @threads.each do |t| %>
+		<% @threads.where(status: 'Approved').each do |t| %>
 		
 			<div class="thread">
 			<h4><%= link_to t.title.titleize, forum_thread_path(t) %></h4>
@@ -17,7 +17,8 @@
 			</div>
 
 			<div class="count">
-				<%= t.forum_posts_count %> Chat
+				<%= t.forum_posts_count %> Chat |
+				<%= t.status %>
 				<% if user_signed_in? && (current_user.level == 'Admin' || current_user.id == t.user_id) %>
 				<%= link_to "", edit_forum_thread_path(t), class: 'btn btn-primary glyphicon glyphicon-pencil' %>
 				<%= link_to "", forum_thread_path(t), class: 'btn btn-danger glyphicon glyphicon-trash', method: :delete, data: {confirm: 'Are you sure?'} %>

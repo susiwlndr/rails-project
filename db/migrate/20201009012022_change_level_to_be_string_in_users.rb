@@ -1,6 +1,6 @@
 class ChangeLevelToBeStringInUsers < ActiveRecord::Migration[6.0]
   def up
-  	change_column :users, :level, :string
+  	change_column :users, :level, :string, default: 'User'
   end
 
   def down

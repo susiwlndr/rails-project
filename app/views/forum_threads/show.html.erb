@@ -14,7 +14,7 @@
 		</div>
 
 		<% if @thread.forum_posts.any? %>
-			<% @thread.forum_posts.each do |p| %>
+			<% @thread.forum_posts.limit(5).each do |p| %>
 			<div class="thread">
 			<div class="meta">
 				<%= I18n.l(p.created_at.to_date) %> oleh <%= p.user.name %>

@@ -1,11 +1,12 @@
 class ForumPostsController < ApplicationController
 	before_action :authenticate_user!, only: [:create]
 	def create
+
 		@thread = ForumThread.find(params[:forum_thread_id])
 		@post = ForumPost.new(resource_params)
 
 		@post.forum_thread = @thread
-		@thread.user = current_user
+		@post.user = current_user
 
 	  if @post.save
 			redirect_to forum_thread_path(@thread)

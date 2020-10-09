@@ -1,7 +1,7 @@
 class ForumThreadsController < ApplicationController
 	before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 	def index
-		@threads = ForumThread.order(id: :desc)
+		@threads = ForumThread.order(created_at: :desc).limit(10)
 	end
 
 	def show
@@ -47,6 +47,6 @@ class ForumThreadsController < ApplicationController
 	private
 
 	def resource_params
-		params.require(:forum_thread).permit(:title, :content)
+		params.require(:forum_thread).permit(:title, :content, :status)
 	end
 end
